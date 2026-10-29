@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ZmT SHOP — your online marketplace to discover products and connect with sellers.">
+  <title>ZmT SHOP | Your Market, Your Choice</title>
+  <style>
+    :root { --red: #d71935; --dark: #171717; --muted: #666; --bg: #f6f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--dark); background: var(--bg); }
+    header { background: #fff; padding: 16px 5%; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 2px 10px #0000000d; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 800; }
+    .logo { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; color: white; background: var(--red); border: 3px solid #f4a0ad; font-size: .85rem; }
+    header a, .button { text-decoration: none; background: var(--red); color: white; padding: 11px 15px; border-radius: 10px; font-weight: 700; border: 0; }
+    .hero { padding: 52px 5% 42px; color: white; background: linear-gradient(135deg, #a90e28, #e52b48); }
+    .hero h1 { max-width: 700px; margin: 0 0 12px; font-size: clamp(2rem, 6vw, 3.5rem); }
+    .hero p { max-width: 620px; line-height: 1.6; font-size: 1.05rem; }
+    .search { display: flex; max-width: 620px; gap: 8px; margin-top: 22px; }
+    .search input { flex: 1; min-width: 0; padding: 14px; border: 0; border-radius: 10px; font-size: 1rem; }
+    main { padding: 28px 5% 50px; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .section-head h2 { margin: 0; }
+    .hint { color: var(--muted); font-size: .92rem; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 16px; margin-top: 20px; }
+    .product { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 14px #0000000a; }
+    .product-art { display: grid; place-items: center; min-height: 130px; background: #fce9ed; font-size: 3rem; }
+    .product-body { padding: 14px; }
+    .product h3 { margin: 0 0 8px; font-size: 1rem; }
+    .product p { margin: 0 0 12px; color: var(--muted); font-size: .9rem; }
+    .product .button { display: block; text-align: center; width: 100%; cursor: pointer; }
+    .notice { background: white; padding: 18px; border-radius: 12px; margin-top: 26px; border-left: 4px solid var(--red); line-height: 1.6; }
+    footer { text-align: center; color: #eee; background: #191919; padding: 24px 5%; line-height: 1.7; }
+    @media (max-width: 420px) { header { padding: 12px 4%; } .brand { font-size: 1.1rem; } .hero { padding: 38px 4%; } main { padding-left: 4%; padding-right: 4%; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="logo">ZMT</span><span>ZmT SHOP</span></div>
+    <a href="#products">Explore products</a>
+  </header>
+
+  <section class="hero">
+    <h1>Your Market, Your Choice! 🛍️</h1>
+    <p>Discover clothes, shoes, electronics, and more. ZmT SHOP is building a place where buyers and sellers can connect.</p>
+    <div class="search">
+      <input id="searchInput" type="search" placeholder="Search products..." aria-label="Search products">
+      <button class="button" onclick="searchProducts()">Search</button>
+    </div>
+  </section>
+
+  <main id="products">
+    <div class="section-head">
+      <h2>Explore products</h2>
+      <span class="hint">Starter shop preview</span>
+    </div>
+    <p class="hint">These are sample categories. Replace them with real products and seller contact details before accepting orders.</p>
+
+    <div class="products" id="productGrid">
+      <article class="product" data-name="clothes fashion">
+        <div class="product-art">👕</div>
+        <div class="product-body"><h3>Clothes & Fashion</h3><p>Discover styles you like.</p><button class="button" onclick="contactSeller('Clothes & Fashion')">Ask about this</button></div>
+      </article>
+      <article class="product" data-name="shoes sneakers">
+        <div class="product-art">👟</div>
+        <div class="product-body"><h3>Shoes</h3><p>Find your next pair.</p><button class="button" onclick="contactSeller('Shoes')">Ask about this</button></div>
+      </article>
+      <article class="product" data-name="phones electronics">
+        <div class="product-art">📱</div>
+        <div class="product-body"><h3>Phones & Electronics</h3><p>Explore useful tech.</p><button class="button" onclick="contactSeller('Phones & Electronics')">Ask about this</button></div>
+      </article>
+      <article class="product" data-name="bags accessories">
+        <div class="product-art">👜</div>
+        <div class="product-body"><h3>Bags & Accessories</h3><p>Complete your look.</p><button class="button" onclick="contactSeller('Bags & Accessories')">Ask about this</button></div>
+      </article>
+    </div>
+
+    <div class="notice"><strong>For sellers:</strong> Want to list a product? Contact the ZmT SHOP owner to arrange a listing. Online ordering, payments, and seller accounts are not connected yet.</div>
+  </main>
+
+  <footer>
+    <strong>ZmT SHOP</strong><br>
+    Your Market, Your Choice! 🚀<br>
+    <small>Product listings and checkout features are coming soon.</small>
+  </footer>
+
+  <script>
+    function searchProducts() {
+      const term = document.getElementById('searchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.product').forEach(card => {
+        card.style.display = card.dataset.name.includes(term) || card.innerText.toLowerCase().includes(term) ? '' : 'none';
+      });
+    }
+    document.getElementById('searchInput').addEventListener('keydown', event => {
+      if (event.key === 'Enter') searchProducts();
+    });
+    function contactSeller(product) {
+      alert('Thanks for your interest in ' + product + '! Seller contact and ordering are not set up yet. Please check back soon.');
+    }
+  </script>
+</body>
+</html>
